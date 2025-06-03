@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>CINEMAS</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #4A90E2, #a1c4fd, #ffffff);
+      color: #333;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    #loginSection {
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6);
+    }
+
+    input[type="password"] {
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+      max-width: 90%;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #ffffff;
+      color: #4A90E2;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      width: 150px;
+      max-width: 90%;
+    }
+
+    button:hover {
+      background-color: #ddd;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .video-box {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      margin-top: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      color: #333;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 450px;
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    @media screen and (max-width: 600px) {
+      iframe {
+        height: auto;
+        aspect-ratio: 16 / 9;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Bagian Login -->
+    <div id="loginSection">
+      <h2>Masukkan Kata Laluan untuk melihat movie yang anda inginkan!</h2>
+      <input type="password" id="passwordInput" placeholder="Kata Laluan" />
+      <br />
+      <button onclick="checkPassword()">Masuk</button>
+    </div>
+
+    <!-- Video 1 -->
+    <div id="video1" class="hidden video-box">
+      <h3>🎬 Mechamato</h3>
+      <iframe 
+        src="https://drive.google.com/file/d/1BhOoo1zeHqnDFKZAK7ki2jLr08ihajru/preview" 
+        allow="autoplay" allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- Video 2 -->
+    <div id="video2" class="hidden video-box">
+      <h3>🎬 Upin Ipin 1</h3>
+      <iframe 
+        src="https://drive.google.com/file/d/1YourVideoIDHere2/preview" 
+        allow="autoplay" allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- Video 3 -->
+    <div id="video3" class="hidden video-box">
+      <h3>🎬 Upin Ipin 2</h3>
+      <iframe 
+        src="https://drive.google.com/file/d/1YourVideoIDHere3/preview" 
+        allow="autoplay" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value.trim();
+
+      // Sembunyikan semua video dan form login
+      document.getElementById("video1").classList.add("hidden");
+      document.getElementById("video2").classList.add("hidden");
+      document.getElementById("video3").classList.add("hidden");
+
+      // Tampilkan video sesuai password
+      if (input === "MechamatoMovie") {
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("video1").classList.remove("hidden");
+      } else if (input === "Upin Ipin1(key)") {
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("video2").classList.remove("hidden");
+      } else if (input === "Upin Ipin2(key)") {
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("video3").classList.remove("hidden");
+      } else {
+        alert("Kata laluan salah!");
+      }
+    }
+  </script>
+</body>
+</html>
