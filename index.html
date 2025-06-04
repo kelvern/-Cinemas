@@ -150,7 +150,7 @@
 
   <script>
     function checkPassword() {
-      const input = document.getElementById("passwordInput").value.trim().toLowerCase();
+      const input = document.getElementById("passwordInput").value;
 
       // Sembunyikan semua video terlebih dahulu
       document.getElementById("video1").classList.add("hidden");
@@ -159,16 +159,16 @@
       document.getElementById("video4").classList.add("hidden");
 
       // Cek password yang cocok
-      if (input === "mechamatomovie") {
+      if (input === "MechamatoMovie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video1").classList.remove("hidden");
-      } else if (input === "upinipin1movie") {
+      } else if (input === "UpinIpin1Movie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video2").classList.remove("hidden");
-      } else if (input === "upinipin2movie" || input === "upinipin 2 movie") {
+      } else if (input === "UpinIpin2Movie" || input === "Upin Ipin 2 Movie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video3").classList.remove("hidden");
-      } else if (input === "minecraftmovie") {
+      } else if (input === "MinecraftMovie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video4").classList.remove("hidden");
       } else {
