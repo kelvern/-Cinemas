@@ -98,7 +98,6 @@
 </head>
 <body>
   <div class="container">
-
     <div id="loginSection">
       <h2>Masukkan Kata Laluan untuk melihat movie yang anda inginkan!</h2>
       <input type="password" id="passwordInput" placeholder="Kata Laluan" />
@@ -111,8 +110,7 @@
       <h3>🎬 Mechamato</h3>
       <iframe 
         src="https://drive.google.com/file/d/1BhOoo1zeHqnDFKZAK7ki2jLr08ihajru/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
+        allow="autoplay; fullscreen" allowfullscreen>
       </iframe>
     </div>
 
@@ -121,8 +119,7 @@
       <h3>🎬 Geng Upin & Ipin Pengembaraan Bermula</h3>
       <iframe 
         src="https://drive.google.com/file/d/1BnOfvH2oH_22yvnaGTec31CPz0iib2ms/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
+        allow="autoplay; fullscreen" allowfullscreen>
       </iframe>
     </div>
 
@@ -131,49 +128,45 @@
       <h3>🎬 Upin & Ipin Keris Siamang Tunggal</h3>
       <iframe 
         src="https://drive.google.com/file/d/1Bs30hvUcW8_m0UBb6bMpVDknRTnUB6eN/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
+        allow="autoplay; fullscreen" allowfullscreen>
       </iframe>
     </div>
 
     <!-- Video 4 -->
     <div id="video4" class="hidden video-box">
-      <h3>🎬 A Minecraft Movie</h3>
+      <h3>🎬 Movie Tambahan</h3>
       <iframe 
         src="https://drive.google.com/file/d/1CwAkunEjBN_JFl-vEMCNeWEm5gPyv2Jl/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
+        allow="autoplay; fullscreen" allowfullscreen>
       </iframe>
     </div>
-
   </div>
 
   <script>
     function checkPassword() {
       const input = document.getElementById("passwordInput").value.trim();
 
-      // Sembunyikan semua video
-      document.getElementById("video1").classList.add("hidden");
-      document.getElementById("video2").classList.add("hidden");
-      document.getElementById("video3").classList.add("hidden");
-      document.getElementById("video4").classList.add("hidden");
+      // Sembunyikan semua
+      const sections = ['video1', 'video2', 'video3', 'video4'];
+      sections.forEach(id => document.getElementById(id).classList.add('hidden'));
 
-      // Tampilkan video sesuai password
+      // Cek password
       if (input === "Mechamato Movie") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video1").classList.remove("hidden");
+        showSection('video1');
       } else if (input === "Upin Ipin1 Movie") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video2").classList.remove("hidden");
+        showSection('video2');
       } else if (input === "Upin Ipin2 Movie") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video3").classList.remove("hidden");
+        showSection('video3');
       } else if (input === "Minecraft Movie") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video4").classList.remove("hidden");
+        showSection('video4');
       } else {
         alert("Kata laluan salah!");
       }
+    }
+
+    function showSection(id) {
+      document.getElementById("loginSection").classList.add("hidden");
+      document.getElementById(id).classList.remove("hidden");
     }
   </script>
 </body>
