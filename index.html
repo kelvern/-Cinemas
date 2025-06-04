@@ -150,25 +150,25 @@
 
   <script>
     function checkPassword() {
-      const input = document.getElementById("passwordInput").value;
+      const input = document.getElementById("passwordInput").value.trim();
 
-      // Sembunyikan semua video terlebih dahulu
+      // Sembunyikan semua video
       document.getElementById("video1").classList.add("hidden");
       document.getElementById("video2").classList.add("hidden");
       document.getElementById("video3").classList.add("hidden");
       document.getElementById("video4").classList.add("hidden");
 
-      // Cek password yang cocok
-      if (input === "MechamatoMovie") {
+      // Tampilkan video sesuai password
+      if (input === "Mechamato Movie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video1").classList.remove("hidden");
-      } else if (input === "UpinIpin1Movie") {
+      } else if (input === "Upin Ipin1 Movie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video2").classList.remove("hidden");
-      } else if (input === "UpinIpin2Movie" || input === "Upin Ipin 2 Movie") {
+      } else if (input === "Upin Ipin2 Movie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video3").classList.remove("hidden");
-      } else if (input === "MinecraftMovie") {
+      } else if (input === "Minecraft Movie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video4").classList.remove("hidden");
       } else {
