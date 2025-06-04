@@ -99,7 +99,6 @@
 <body>
   <div class="container">
 
-    <!-- Bagian Login -->
     <div id="loginSection">
       <h2>Masukkan Kata Laluan untuk melihat movie yang anda inginkan!</h2>
       <input type="password" id="passwordInput" placeholder="Kata Laluan" />
@@ -112,25 +111,28 @@
       <h3>🎬 Mechamato</h3>
       <iframe 
         src="https://drive.google.com/file/d/1BhOoo1zeHqnDFKZAK7ki2jLr08ihajru/preview" 
-        allow="autoplay" allowfullscreen>
+        allow="autoplay; fullscreen" 
+        allowfullscreen>
       </iframe>
     </div>
 
     <!-- Video 2 -->
     <div id="video2" class="hidden video-box">
-      <h3>🎬 Upin Ipin 1</h3>
+      <h3>🎬 Geng Upin & Ipin Pengembaraan Bermula</h3>
       <iframe 
-        src="https://drive.google.com/file/d/1YourVideoIDHere2/preview" 
-        allow="autoplay" allowfullscreen>
+        src="https://drive.google.com/file/d/1BnOfvH2oH_22yvnaGTec31CPz0iib2ms/preview" 
+        allow="autoplay; fullscreen" 
+        allowfullscreen>
       </iframe>
     </div>
 
     <!-- Video 3 -->
     <div id="video3" class="hidden video-box">
-      <h3>🎬 Upin Ipin 2</h3>
+      <h3>🎬 Upin & Ipin Keris Siamang Tunggal</h3>
       <iframe 
         src="https://drive.google.com/file/d/1YourVideoIDHere3/preview" 
-        allow="autoplay" allowfullscreen>
+        allow="autoplay; fullscreen" 
+        allowfullscreen>
       </iframe>
     </div>
   </div>
@@ -145,13 +147,13 @@
       document.getElementById("video3").classList.add("hidden");
 
       // Tampilkan video sesuai password
-      if (input === "MechamatoMovie") {
+      if (input === "Mechamato Movie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video1").classList.remove("hidden");
-      } else if (input === "Upin Ipin1(key)") {
+      } else if (input === "Upin Ipin1 Movie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video2").classList.remove("hidden");
-      } else if (input === "Upin Ipin2(key)") {
+      } else if (input === "Upin Ipin2 movie") {
         document.getElementById("loginSection").classList.add("hidden");
         document.getElementById("video3").classList.remove("hidden");
       } else {
