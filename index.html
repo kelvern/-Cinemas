@@ -4,18 +4,31 @@
   <meta charset="UTF-8" />
   <title>🎥CINEMAS🍿</title>
   <style>
+    :root {
+      --bg-light: linear-gradient(to right, #4A90E2, #a1c4fd, #ffffff);
+      --bg-dark: #1e1e1e;
+      --text-light: #333;
+      --text-dark: #fff;
+    }
+
     body {
       margin: 0;
       padding: 20px;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #4A90E2, #a1c4fd, #ffffff);
-      color: #333;
+      background: var(--bg-light);
+      color: var(--text-light);
       text-align: center;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    .dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
     }
 
     .container {
@@ -24,14 +37,9 @@
       margin: 0 auto;
     }
 
-    #loginSection {
-      margin-bottom: 30px;
-    }
-
     h2 {
       font-size: 32px;
       margin-bottom: 20px;
-      text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6);
     }
 
     input[type="password"] {
@@ -41,23 +49,19 @@
       border-radius: 25px;
       outline: none;
       margin-bottom: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       width: 300px;
       max-width: 90%;
     }
 
     button {
-      padding: 15px 30px;
-      font-size: 18px;
-      background-color: #ffffff;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #fff;
       color: #4A90E2;
       border: none;
-      border-radius: 25px;
+      border-radius: 20px;
       cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-      width: 150px;
-      max-width: 90%;
+      margin: 5px;
     }
 
     button:hover {
@@ -69,150 +73,144 @@
     }
 
     .video-box {
-      background: rgba(255, 255, 255, 0.5);
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+      background: rgba(255,255,255,0.3);
       backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 30px;
       margin-top: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      color: #333;
-      width: 100%;
-      max-width: 800px;
     }
 
     iframe {
       width: 100%;
       height: 450px;
       border-radius: 12px;
-      border: none;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
 
-    @media screen and (max-width: 600px) {
-      iframe {
-        height: auto;
-        aspect-ratio: 16 / 9;
-      }
+    .video-list {
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .video-list li {
+      cursor: pointer;
+      padding: 8px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .video-list li:hover {
+      background-color: #f0f0f0;
+    }
+
+    #loading {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-
-    <div id="loginSection">
-      <h2>Masukkan Kata Laluan untuk melihat movie yang anda inginkan!</h2>
-      <input type="password" id="passwordInput" placeholder="Kata Laluan" />
-      <br />
-      <button onclick="checkPassword()">Masuk</button>
-    </div>
-
-    <!-- Video 1 -->
-    <div id="video1" class="hidden video-box">
-      <h3>🎬 Mechamato</h3>
-      <iframe 
-        src="https://drive.google.com/file/d/1BhOoo1zeHqnDFKZAK7ki2jLr08ihajru/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <!-- Video 2 -->
-    <div id="video2" class="hidden video-box">
-      <h3>🎬 Geng Upin & Ipin Pengembaraan Bermula</h3>
-      <iframe 
-        src="https://drive.google.com/file/d/1BnOfvH2oH_22yvnaGTec31CPz0iib2ms/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <!-- Video 3 -->
-    <div id="video3" class="hidden video-box">
-      <h3>🎬 Upin & Ipin Keris Siamang Tunggal</h3>
-      <iframe 
-        src="https://drive.google.com/file/d/1Bs30hvUcW8_m0UBb6bMpVDknRTnUB6eN/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <!-- Video 4 -->
-    <div id="video4" class="hidden video-box">
-      <h3>🎬 A Minecraft Movie</h3>
-      <iframe 
-        src="https://drive.google.com/file/d/1CwAkunEjBN_JFl-vEMCNeWEm5gPyv2Jl/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <!-- Video 5 -->
-    <div id="video5" class="hidden video-box">
-      <h3>🎬 Dongeng Sang Kancil</h3>
-      <iframe 
-        src="https://drive.google.com/file/d/1DZpp51G11N2hFbjdE6V8-CVFpNithbXU/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
-      </iframe>
-    </div>
+    <h2>Masukkan Kata Laluan untuk melihat movie yang anda inginkan!</h2>
+    <input type="password" id="passwordInput" placeholder="Kata Laluan" />
+    <br />
+    <button onclick="checkPassword()">Masuk</button>
+    <button onclick="copyPassword()">Salin Kata Sandi</button>
+    <button onclick="toggleTheme()">🌙/☀️</button>
+    <p id="loading" class="hidden">Memuat dalam <span id="countdown">3</span> detik...</p>
     
-    <!-- Video 6 -->
-    <div id="video6" class="hidden video-box">
-      <h3>🎬 Doraemon Nobita's The Moon Exploration'</h3>
-      <iframe 
-        src="https://drive.google.com/file/d/1FhAdZ0Zw0DJrNWOH8VIS_Zy6qNBs8nG8/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
-      </iframe>
-    </div>
-    
-    <!-- Video 7 -->
-    <div id="video7" class="hidden video-box">
-      <h3>🎬 Ejen Ali Movie 1 Misi : Neo</h3>
-      <iframe 
-        src="https://drive.google.com/file/d/1FkWA0ZvIk69CURxurlPM_5WwCX2s-gcX/preview" 
-        allow="autoplay; fullscreen" 
-        allowfullscreen>
-      </iframe>
-    </div>
+    <ul class="video-list">
+      <li onclick="quickAccess('Mechamato Movie')">🎬 Mechamato</li>
+      <li onclick="quickAccess('Upin Ipin1 Movie')">🎬 Geng Upin & Ipin</li>
+      <li onclick="quickAccess('Upin Ipin2 Movie')">🎬 Upin & Ipin: Keris Siamang</li>
+      <li onclick="quickAccess('Minecraft Movie')">🎬 A Minecraft Movie</li>
+      <li onclick="quickAccess('Sang Kancil Movie')">🎬 Dongeng Sang Kancil</li>
+      <li onclick="quickAccess('Doraemon The Moon')">🎬 Doraemon Moon</li>
+      <li onclick="quickAccess('Ejen Ali Movie 1')">🎬 Ejen Ali Movie 1</li>
+      <li onclick="quickAccess('Bola Kampung 3D Movie')">🎬 Bola Kampung 3D</li>
+      <li onclick="quickAccess('Boboiboy Movie 1')">🎬 Boboiboy Movie 1</li>
+      <li onclick="quickAccess('Boboiboy Movie 2')">🎬 Boboiboy Movie 2</li>
+    </ul>
 
+    <!-- Semua video -->
+    <div id="videoContainer"></div>
+
+    <button class="hidden" id="backBtn" onclick="goBack()">🔙 Kembali</button>
   </div>
 
+  <audio id="loginSound" src="https://www.myinstants.com/media/sounds/metal-gear-solid-alert.mp3"></audio>
+
   <script>
+    const videos = {
+      "Mechamato Movie": ["https://drive.google.com/file/d/1BhOoo1zeHqnDFKZAK7ki2jLr08ihajru/preview", "Mechamato"],
+      "Upin Ipin1 Movie": ["https://drive.google.com/file/d/1BnOfvH2oH_22yvnaGTec31CPz0iib2ms/preview", "Geng Upin & Ipin"],
+      "Upin Ipin2 Movie": ["https://drive.google.com/file/d/1Bs30hvUcW8_m0UBb6bMpVDknRTnUB6eN/preview", "Upin & Ipin Keris Siamang"],
+      "Minecraft Movie": ["https://drive.google.com/file/d/1CwAkunEjBN_JFl-vEMCNeWEm5gPyv2Jl/preview", "A Minecraft Movie"],
+      "Sang Kancil Movie": ["https://drive.google.com/file/d/1DZpp51G11N2hFbjdE6V8-CVFpNithbXU/preview", "Dongeng Sang Kancil"],
+      "Doraemon The Moon": ["https://drive.google.com/file/d/1FhAdZ0Zw0DJrNWOH8VIS_Zy6qNBs8nG8/preview", "Doraemon Moon"],
+      "Ejen Ali Movie 1": ["https://drive.google.com/file/d/1FkWA0ZvIk69CURxurlPM_5WwCX2s-gcX/preview", "Ejen Ali Movie 1"],
+      "Bola Kampung 3D Movie": ["https://drive.google.com/file/d/1G-cRj8V2OVTRb1sGuewcPZQN2oTjAwdg/preview", "Bola Kampung 3D"],
+      "Boboiboy Movie 1": ["https://drive.google.com/file/d/1G36LxkvmSnGLncMxw2TgmURPt9EZrzjD/preview", "Boboiboy Movie 1"],
+      "Boboiboy Movie 2": ["https://drive.google.com/file/d/1G9UgcahT2CDkNoNH0QLgTx6qyvhkNePe/preview", "Boboiboy Movie 2"],
+    };
+
     function checkPassword() {
       const input = document.getElementById("passwordInput").value.trim();
-
-      // Sembunyikan semua video
-      for (let i = 1; i <= 5; i++) {
-        document.getElementById("video" + i).classList.add("hidden");
-      }
-
-      // Tampilkan video sesuai password
-      if (input === "Mechamato Movie") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video1").classList.remove("hidden");
-      } else if (input === "Upin Ipin1 Movie") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video2").classList.remove("hidden");
-      } else if (input === "Upin Ipin2 Movie") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video3").classList.remove("hidden");
-      } else if (input === "Minecraft Movie") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video4").classList.remove("hidden");
-      } else if (input === "Sang Kancil Movie") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video5").classList.remove("hidden");
-      } else if (input === "Doraemon The Moon") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video6").classList.remove("hidden");
-      } else if (input === "Ejen Ali Movie 1") {
-        document.getElementById("loginSection").classList.add("hidden");
-        document.getElementById("video7").classList.remove("hidden");
-        
+      if (videos[input]) {
+        document.getElementById("loading").classList.remove("hidden");
+        let count = 3;
+        const countdown = setInterval(() => {
+          document.getElementById("countdown").innerText = count;
+          count--;
+          if (count < 0) {
+            clearInterval(countdown);
+            playVideo(input);
+            document.getElementById("loading").classList.add("hidden");
+          }
+        }, 1000);
       } else {
         alert("Kata laluan salah!");
       }
+    }
+
+    function playVideo(key) {
+      const [src, title] = videos[key];
+      const container = document.getElementById("videoContainer");
+      container.innerHTML = `
+        <div class="video-box">
+          <h3>🎬 ${title}</h3>
+          <iframe src="${src}" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+      `;
+      document.getElementById("backBtn").classList.remove("hidden");
+      document.getElementById("loginSound").play();
+    }
+
+    function goBack() {
+      document.getElementById("videoContainer").innerHTML = "";
+      document.getElementById("backBtn").classList.add("hidden");
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+    }
+
+    function copyPassword() {
+      const input = document.getElementById("passwordInput");
+      input.select();
+      navigator.clipboard.writeText(input.value);
+      alert("Kata sandi disalin!");
+    }
+
+    function quickAccess(keyword) {
+      document.getElementById("passwordInput").value = keyword;
+      checkPassword();
     }
   </script>
 </body>
