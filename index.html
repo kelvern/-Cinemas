@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="my">
 <head>
   <meta charset="UTF-8" />
   <title>🎥CINEMAS🍿</title>
@@ -117,13 +117,14 @@
 </head>
 <body>
   <div class="container">
-    <h2>Masukkan Kata Laluan untuk melihat movie yang anda inginkan!</h2>
+    <h2 id="titleText">Masukkan Kata Laluan untuk melihat filem yang anda inginkan!</h2>
     <input type="password" id="passwordInput" placeholder="Kata Laluan" />
     <br />
-    <button onclick="checkPassword()">Masuk</button>
-    <button onclick="copyPassword()">Salin Kata Sandi</button>
+    <button onclick="checkPassword()" id="masukBtn">Masuk</button>
+    <button onclick="copyPassword()" id="salinBtn">Salin Kata Laluan</button>
     <button onclick="toggleTheme()">🌙/☀️</button>
-    <p id="loading" class="hidden">Memuat dalam <span id="countdown">3</span> detik...</p>
+    <button onclick="toggleLang()" id="langBtn">🇮🇩 Indonesia</button>
+    <p id="loading" class="hidden"><span id="loadingText">Memuat dalam</span> <span id="countdown">3</span> detik...</p>
     
     <ul class="video-list">
       <li onclick="quickAccess('Mechamato Movie')">🎬 Mechamato</li>
@@ -136,11 +137,10 @@
       <li onclick="quickAccess('Bola Kampung 3D Movie')">🎬 Bola Kampung 3D</li>
       <li onclick="quickAccess('Boboiboy Movie 1')">🎬 Boboiboy Movie 1</li>
       <li onclick="quickAccess('Boboiboy Movie 2')">🎬 Boboiboy Movie 2</li>
+      <li onclick="quickAccess('Paddington In Peru')">🎬 Paddington In Peru</li>
     </ul>
 
-    <!-- Semua video -->
     <div id="videoContainer"></div>
-
     <button class="hidden" id="backBtn" onclick="goBack()">🔙 Kembali</button>
   </div>
 
@@ -156,10 +156,62 @@
       "Bola Kampung 3D Movie": ["https://drive.google.com/file/d/1G-cRj8V2OVTRb1sGuewcPZQN2oTjAwdg/preview", "Bola Kampung 3D"],
       "Boboiboy Movie 1": ["https://drive.google.com/file/d/1G36LxkvmSnGLncMxw2TgmURPt9EZrzjD/preview", "Boboiboy Movie 1"],
       "Boboiboy Movie 2": ["https://drive.google.com/file/d/1G9UgcahT2CDkNoNH0QLgTx6qyvhkNePe/preview", "Boboiboy Movie 2"],
+      "Paddington In Peru": ["https://drive.google.com/file/d/1HUyzNpeIdHsDODryyVfrMrsmgT7LfZhX/preview", "Paddington In Peru"],
     };
+
+    let langs = ['my', 'id', 'en'];
+    let currentLangIndex = 0;
+
+    const textContent = {
+      my: {
+        title: "Masukkan Kata Laluan untuk melihat filem yang anda inginkan!",
+        placeholder: "Kata Laluan",
+        masuk: "Masuk",
+        salin: "Salin Kata Laluan",
+        kembali: "🔙 Kembali",
+        loading: "Memuat dalam",
+        salah: "Kata laluan tidak sah!",
+        lang: "🇮🇩 Indonesia"
+      },
+      id: {
+        title: "Masukkan Kata Sandi untuk melihat film yang kamu inginkan!",
+        placeholder: "Kata Sandi",
+        masuk: "Masuk",
+        salin: "Salin Kata Sandi",
+        kembali: "🔙 Kembali",
+        loading: "Memuat dalam",
+        salah: "Kata sandi salah!",
+        lang: "🇬🇧 English"
+      },
+      en: {
+        title: "Enter Password to watch the movie you want!",
+        placeholder: "Password",
+        masuk: "Enter",
+        salin: "Copy Password",
+        kembali: "🔙 Back",
+        loading: "Loading in",
+        salah: "Incorrect password!",
+        lang: "🇲🇾 Melayu"
+      }
+    };
+
+    function toggleLang() {
+      currentLangIndex = (currentLangIndex + 1) % langs.length;
+      const currentLang = langs[currentLangIndex];
+      const t = textContent[currentLang];
+
+      document.getElementById("titleText").innerText = t.title;
+      document.getElementById("passwordInput").placeholder = t.placeholder;
+      document.getElementById("masukBtn").innerText = t.masuk;
+      document.getElementById("salinBtn").innerText = t.salin;
+      document.getElementById("langBtn").innerText = t.lang;
+      document.getElementById("loadingText").innerText = t.loading;
+      document.getElementById("backBtn").innerText = t.kembali;
+    }
 
     function checkPassword() {
       const input = document.getElementById("passwordInput").value.trim();
+      const currentLang = langs[currentLangIndex];
       if (videos[input]) {
         document.getElementById("loading").classList.remove("hidden");
         let count = 3;
@@ -173,7 +225,7 @@
           }
         }, 1000);
       } else {
-        alert("Kata laluan salah!");
+        alert(textContent[currentLang].salah);
       }
     }
 
